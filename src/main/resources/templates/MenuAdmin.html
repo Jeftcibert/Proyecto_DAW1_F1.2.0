@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org" style="zoom: 80%; width: 99%;" >
+
+<head th:fragment="head_h">
+	<title>Ciberfarma</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!-- Latest compiled and minified css-->
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link th:href="@{/styles/cssandjs/MenuAdmin.css}" rel="stylesheet" />
+</head>
+
+<body>
+
+	<div class="sidebar open ">
+		<div class="toggle" onclick="sliding()">
+			<i class="bx bx-chevron-right"></i>
+		</div>
+		<div class="profile">
+			<img th:src="@{https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png}" alt="">
+			<h3>NOMBRE USUARIO</h3>
+		</div>
+		<nav>
+			<div class="title">
+				Mantenimiento
+			</div>
+			<!--			inicio -->
+			<ul>
+				<li class="item active">
+					<i class='bx bxs-dashboard'> <a href="/login/Cliente"
+							target="miContenedor"><span>Administración</span></a></i>
+				</li>
+			</ul>
+			<!--			// -->
+			<ul>
+				<li class="item">
+					<i class='bx bxs-bar-chart-alt-2'><a href="#" target="miContenedor"><span>Procesos</span></a></i>
+				</li>
+			</ul>
+			<!--			// -->
+
+
+			<ul>
+				<li class="item">
+					<i class='bx bxs-wallet'><a href="#" target="miContenedor"><span>Consultas</span></a></i>
+				</li>
+			</ul>
+			<!--			// -->
+			<ul>
+				<li class="item">
+					<i class='bx bxs-bell'><a href="#" target="miContenedor"><span>Reportes</span></a></i>
+				</li>
+			</ul>
+			<!--			// -->
+			<ul>
+				<li class="item">
+					<i class='bx bxs-cog'><a href="#" target="miContenedor"><span>Analisis</span></a></i>
+				</li>
+			</ul>
+			<hr>
+			<!--		comenzamos de nuevo	// -->
+			<div class="title">
+				Soporte
+			</div>
+			<!--			inicio -->
+			<ul>
+				<li class="item active">
+					<i class='bx bxs-help-circle'><a href="#" target="miContenedor"><span>Analisis</span></a></i>
+				</li>
+			</ul>
+			<!--			// -->
+			<ul>
+				<li class="item">
+					<i class='bx bxs-message-dots'><a href="#" target="miContenedor"><span>Analisis</span></a> </i>
+				</li>
+			</ul>
+			<!--			// -->
+			<hr>
+			<div class="title">
+
+			</div>
+			<!--			inicio -->
+			<ul>
+				<li class="item active">
+					<i class='bx bxs-help-circle'><a href="#" target="miContenedor"><span>Cambiar
+								contraseña</span></a></i>
+				</li>
+			</ul>
+
+		</nav>
+
+	</div>
+	<div class="conts">
+		<iframe class="Segunda-ventana" frameBorder="0" name="miContenedor">
+
+		</iframe>
+
+
+
+
+	</div>
+
+	<script th:src="@{/js/cssandjs/sidebarMenu.js}"></script>
+</body>
+
+</html>

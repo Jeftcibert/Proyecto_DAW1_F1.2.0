@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thimeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Mantenimiento Usuarios</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+	<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--<link href="" rel="stylesheet">-->
+
+
+</head>
+
+<body>
+	<div class="container">
+		
+		
+			
+				<div class="container mt-2">
+					<div class="row">
+						<div class="col-lg-12">
+							<button id="btnNuevo" type="button" class="btn btn-info" data-toggle="modal"><i
+									class="material-icons">library_add</i></button>
+						</div>
+					</div>
+				</div>
+				<br>
+		
+		<table id="example" class="table table-striped" style="width:100%">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Acciones</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Id</td>
+					<td>nombre</td>
+
+
+				</tr>
+				</tfoot>
+		</table>
+	</div>
+	
+	
+	<!--Modal para CRUD-->
+<div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <form id="formUsuarios">    
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="" class="col-form-label">User Name:</label>
+                    <input type="text" class="form-control" id="username">
+                    </div>
+                    </div>
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="" class="col-form-label">First Name</label>
+                    <input type="text" class="form-control" id="first_name">
+                    </div> 
+                    </div>    
+                </div>
+                <div class="row"> 
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="" class="col-form-label">Last Name</label>
+                    <input type="text" class="form-control" id="last_name">
+                    </div>               
+                    </div>
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="" class="col-form-label">Gender</label>
+                    <input type="text" class="form-control" id="gender">
+                    </div>
+                    </div>  
+                </div>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="form-group">
+                        <label for="" class="col-form-label">Password</label>
+                        <input type="text" class="form-control" id="password">
+                        </div>
+                    </div>    
+                    <div class="col-lg-3">    
+                        <div class="form-group">
+                        <label for="" class="col-form-label">Status</label>
+                        <input type="number" class="form-control" id="status">
+                        </div>            
+                    </div>    
+                </div>                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                <button type="submit" id="btnGuardar" class="btn btn-dark">Guardar</button>
+            </div>
+        </form>    
+        </div>
+    </div>
+</div>  
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+	<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#example').DataTable({
+				pageLength: 2,
+				ajax: {
+					url: '/api/TipUsuario/findall',
+					dataSrc: '',
+				},
+				columns: [
+					{data: 'id'},
+					{data: 'nombre'},
+					{"defaultContent":" <td><a class='btn btn-warning  me-2' href='' role='button'>Editar</a></td><td><a class='btn btn-danger  ' href='' role='button'>Eliminar</a></td> "}, 
+								
+<!--					"<div class='text-center'><div class='btn-group m-1'><button class='btn btn-primary btn-sm btnEditar'><i class='material-icons'>edit</i></button><button class='btn btn-danger btn-sm btnBorrar'><i class='material-icons'>delete</i></button></div></div>"}-->
+				],
+				"language": {
+					"url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+				}
+			});
+		});
+		
+//submit para el Alta y Actualización
+$('#formUsuarios').submit(function(e){                         
+    e.preventDefault(); //evita el comportambiento normal del submit, es decir, recarga total de la página
+    username = $.trim($('#username').val());    
+    first_name = $.trim($('#first_name').val());
+    last_name = $.trim($('#last_name').val());    
+    gender = $.trim($('#gender').val());    
+    password = $.trim($('#password').val());
+    status = $.trim($('#status').val());                            
+        $.ajax({
+          url: "bd/crud.php",
+          type: "POST",
+          datatype:"json",    
+          data:  {user_id:user_id, username:username, first_name:first_name, last_name:last_name, gender:gender, password:password ,status:status ,opcion:opcion},    
+          success: function(data) {
+            tablaUsuarios.ajax.reload(null, false);
+           }
+        });			        
+    $('#modalCRUD').modal('hide');											     			
+});
+        
+ 
+
+//para limpiar los campos antes de dar de Alta una Persona
+$("#btnNuevo").click(function(){
+    opcion = 1; //alta           
+    user_id=null;
+    $("#formUsuarios").trigger("reset");
+    $(".modal-header").css( "background-color", "#17a2b8");
+    $(".modal-header").css( "color", "white" );
+    $(".modal-title").text("Alta de Usuario");
+    $('#modalCRUD').modal('show');	    
+});
+
+
+     
+
+		
+		
+
+	</script>
+</body>
+
+</html>>
